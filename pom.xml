@@ -10,9 +10,9 @@
     <version>1.0</version>
 
     <modules>
-        <module>client</module>
         <module>server</module>
         <module>common</module>
+        <module>client</module>
     </modules>
     
     <properties>
