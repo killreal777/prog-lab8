@@ -1,8 +1,9 @@
 package server;
 
-import abstractions.requests.CommandRequest;
+import requestes.CommandRequest;
 import exceptions.ConnectionException;
 import exceptions.DeserializationException;
+import response.Result;
 import serialization.Serializer;
 
 import java.io.IOException;
@@ -10,24 +11,24 @@ import java.nio.ByteBuffer;
 import java.util.function.Function;
 
 public class Server extends ServerMultiThread {
-    private final Function<CommandRequest, String> executeCommandFunction;
+    private final Function<CommandRequest, Result> executeCommandFunction;
     private final Serializer<CommandRequest> commandRequestSerializer;
-    private final Serializer<String> stringSerializer;
-    private String response;
+    private final Serializer<Result> resultSerializer;
+    private Result result;
 
-    public Server(Function<CommandRequest, String> executeCommandFunction)
+    public Server(Function<CommandRequest, Result> executeCommandFunction)
             throws IOException {
         super("localhost", 7700);
         this.executeCommandFunction = executeCommandFunction;
         this.commandRequestSerializer = new Serializer<>();
-        this.stringSerializer = new Serializer<>();
+        this.resultSerializer = new Serializer<>();
     }
 
     @Override
     protected void handleRequestBuffer(ByteBuffer requestBuffer) {
         try {
             CommandRequest request = commandRequestSerializer.deserialize(requestBuffer.array());
-            response = executeCommandFunction.apply(request);
+            result = executeCommandFunction.apply(request);
         } catch (DeserializationException e) {
             throw new ConnectionException();
         }
@@ -35,6 +36,6 @@ public class Server extends ServerMultiThread {
 
     @Override
     protected ByteBuffer prepareResponseBuffer() {
-        return ByteBuffer.wrap(stringSerializer.serialize(response));
+        return ByteBuffer.wrap(resultSerializer.serialize(result));
     }
 }

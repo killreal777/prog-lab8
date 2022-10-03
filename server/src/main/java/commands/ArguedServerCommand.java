@@ -1,6 +1,6 @@
 package commands;
 
-import abstractions.requests.ArguedCommandRequest;
+import requestes.ArguedCommandRequest;
 import data.dao.Dao;
 
 public abstract class ArguedServerCommand<ArgType> extends ServerCommand {

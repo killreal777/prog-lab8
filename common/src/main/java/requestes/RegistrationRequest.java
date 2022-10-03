@@ -1,7 +1,5 @@
 package requestes;
 
-import abstractions.requests.ArguedCommandRequest;
-
 public class RegistrationRequest extends ArguedCommandRequest<String> {
     public RegistrationRequest() {
         super("registration");

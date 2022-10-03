@@ -1,7 +1,5 @@
 package requestes;
 
-import abstractions.requests.ArguedCommandRequest;
-
 public class FilterStartsWithNameRequest extends ArguedCommandRequest<String> {
     public FilterStartsWithNameRequest() {
         super("filter_starts_with_name");

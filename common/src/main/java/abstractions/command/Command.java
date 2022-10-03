@@ -4,13 +4,14 @@ import abstractions.prototypes.CloneablePrototype;
 import exceptions.ArgumentAmountException;
 import io.Format;
 import io.TextFormatter;
+import response.Result;
 
 public abstract class Command extends CloneablePrototype {
     protected String name;
-    protected String result;
+    protected Result result;
 
     public Command() {
-        this.result = "";
+        this.result = new Result();
     }
 
     abstract public void execute();
@@ -25,20 +26,22 @@ public abstract class Command extends CloneablePrototype {
     }
 
     public void writeResult(String newResult) {
-        if (!result.equals(""))
-            result = result + "\n";
-        result = result + newResult;
+        result.writeMessageLine(newResult);
     }
 
-    public void setGoodResult(String result) {
-        this.result = TextFormatter.format(result, Format.GREEN);
+    public void setGoodResult(String message) {
+        result.setGoodResult(message);
     }
 
-    public void setBadResult(String result) {
-        this.result = TextFormatter.format(result, Format.RED);
+    public void setBadResult(String message) {
+        result.setBadResult(message);
     }
 
-    public String getResult() {
+    public String getMessage() {
+        return result.getMessage();
+    }
+
+    public Result getResult() {
         return result;
     }
 

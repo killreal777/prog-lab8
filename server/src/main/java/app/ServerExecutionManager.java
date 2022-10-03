@@ -1,10 +1,11 @@
 package app;
 
 import abstractions.command.Command;
-import abstractions.requests.ArguedCommandRequest;
-import abstractions.requests.CommandRequest;
+import requestes.ArguedCommandRequest;
+import requestes.CommandRequest;
 import commands.ArguedServerCommand;
 import commands.ServerCommand;
+import response.Result;
 
 public class ServerExecutionManager {
     private final ServerCommandManager commandsManager;
@@ -13,7 +14,7 @@ public class ServerExecutionManager {
         this.commandsManager = new ServerCommandManager();
     }
 
-    public String executeCommand(CommandRequest request) {
+    public Result executeCommand(CommandRequest request) {
         ServerCommand command = commandsManager.clonePrototype(request.getCommandName());
         command.setUserName(request.getUserName());
         if (command instanceof ArguedServerCommand<?>)

@@ -63,8 +63,9 @@ public class Location implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof Location loc))
+        if (!(obj instanceof Location))
             return false;
+        Location loc = (Location) obj;
         return loc.name.equals(name) && loc.x.equals(x) && loc.y == y && loc.z == z;
     }
 }

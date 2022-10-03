@@ -4,6 +4,7 @@ import data.dao.Dao;
 import model.Address;
 import model.Organization;
 
+import java.util.Optional;
 import java.util.function.Predicate;
 
 public class RemoveByAddress extends ArguedServerCommand<Address> {
@@ -15,8 +16,11 @@ public class RemoveByAddress extends ArguedServerCommand<Address> {
     @Override
     public void execute() {
         Predicate<Organization> matchAddress = (org) -> org.getOfficialAddress().equals(this.commandArgument);
-        dao.getCollection().stream().filter(matchAddress).findFirst()
-                .ifPresentOrElse(this::removeOrganizationFromDataCollection, this::setBadResult);
+        Optional<Organization> org = dao.getCollection().stream().filter(matchAddress).findFirst();
+        if (org.isPresent())
+            removeOrganizationFromDataCollection(org.get());
+        else
+            setBadResult("В коллекции нет подходящего элемента");
     }
 
     private void removeOrganizationFromDataCollection(Organization organization) {
@@ -28,9 +32,5 @@ public class RemoveByAddress extends ArguedServerCommand<Address> {
             dao.removeById(organization.getId());
             setGoodResult(String.format("Удалена оганизация \"%s\"", organization.getName()));
         }
-    }
-
-    private void setBadResult() {
-        setBadResult("В коллекции нет подходящего элемента");
     }
 }

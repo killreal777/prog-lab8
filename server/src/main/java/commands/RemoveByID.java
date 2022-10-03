@@ -3,6 +3,7 @@ package commands;
 import data.dao.Dao;
 import model.Organization;
 
+import java.util.Optional;
 import java.util.function.Predicate;
 
 public class RemoveByID extends ArguedServerCommand<Integer> {
@@ -14,8 +15,11 @@ public class RemoveByID extends ArguedServerCommand<Integer> {
     @Override
     public void execute() {
         Predicate<Organization> matchId = (org) -> org.getId().equals(this.commandArgument);
-        dao.getCollection().stream().filter(matchId).findFirst()
-                .ifPresentOrElse(this::removeOrganizationFromDataCollection, this::setBadResult);
+        Optional<Organization> org = dao.getCollection().stream().filter(matchId).findFirst();
+        if (org.isPresent())
+            removeOrganizationFromDataCollection(org.get());
+        else
+            setBadResult("В коллекции нет подходящего элемента");
     }
 
     private void removeOrganizationFromDataCollection(Organization organization) {
@@ -27,9 +31,5 @@ public class RemoveByID extends ArguedServerCommand<Integer> {
             dao.removeById(organization.getId());
             setGoodResult(String.format("Удалена оганизация \"%s\"", organization.getName()));
         }
-    }
-
-    private void setBadResult() {
-        setBadResult("В коллекции нет подходящего элемента");
     }
 }

@@ -4,6 +4,7 @@ import data.dao.Dao;
 import model.Organization;
 
 import java.util.Collection;
+import java.util.Optional;
 import java.util.PriorityQueue;
 import java.util.function.Predicate;
 
@@ -21,8 +22,11 @@ public class Update extends ArguedServerCommand<Organization> {
         organization = this.commandArgument;
         id = organization.getId();
         Predicate<Organization> sameId = (organization) -> organization.getId().equals(id);
-        dao.getCollection().stream().filter(sameId).findAny()
-                .ifPresentOrElse(this::update, this::setResultNoMatchingId);
+        Optional<Organization> org = dao.getCollection().stream().filter(sameId).findAny();
+        if (org.isPresent())
+            update(org.get());
+        else
+            setBadResult("В коллекции нет элемента с указанным id");
     }
 
     private void update(Organization oldOrganization) {
@@ -44,9 +48,5 @@ public class Update extends ArguedServerCommand<Organization> {
             return false;
         else
             return collection.stream().map(Organization::getFullName).anyMatch(organization.getFullName()::equals);
-    }
-
-    private void setResultNoMatchingId() {
-        setBadResult("В коллекции нет элемента с указанным id");
     }
 }

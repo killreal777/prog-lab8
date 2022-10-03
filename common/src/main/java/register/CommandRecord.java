@@ -34,9 +34,6 @@ public enum CommandRecord {
     HEAD(CommandType.SERVER, "head", "",
             "вывести в стандартный поток вывода первый элемент коллекции в строковом представлении"),
 
-    PRINT_ASCENDING(CommandType.SERVER, "print_ascending", "",
-            "вывести элементы коллекции в порядке возрастания"),
-
     INFO(CommandType.SERVER, "info", "",
             "вывести в стандартный поток вывода информацию о коллекции"),
 

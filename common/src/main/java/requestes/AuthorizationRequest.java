@@ -1,7 +1,5 @@
 package requestes;
 
-import abstractions.requests.ArguedCommandRequest;
-
 public class AuthorizationRequest extends ArguedCommandRequest<String> {
     public AuthorizationRequest() {
         super("authorization");

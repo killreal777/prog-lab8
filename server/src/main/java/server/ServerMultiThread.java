@@ -1,7 +1,6 @@
 package server;
 
 import exceptions.ConnectionException;
-import exceptions.ServerException;
 import io.Format;
 import io.TextFormatter;
 
@@ -11,7 +10,6 @@ import java.net.SocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 

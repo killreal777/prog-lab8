@@ -1,7 +1,5 @@
 package requestes;
 
-import abstractions.requests.CommandRequest;
-
 public class ArglessCommandRequest extends CommandRequest {
 
     public ArglessCommandRequest(String commandName) {

@@ -3,6 +3,8 @@ package commands;
 import data.dao.Dao;
 import model.Organization;
 
+import java.util.Collection;
+
 public class Show extends ServerCommand {
 
     public Show(Dao dao) {
@@ -12,8 +14,10 @@ public class Show extends ServerCommand {
 
     @Override
     public void execute() {
-        dao.getCollection().stream().sorted().map(Organization::toString).forEach(this::writeResult);
+        Collection<Organization> collection = dao.getCollection();
+        result.setJavaObject(collection);
+        collection.stream().sorted().map(Organization::toString).forEach(result::setGoodResult);
         if (result.equals(""))
-            result = "Коллекция пуста";
+            result.setBadResult("Коллекция пуста");
     }
 }

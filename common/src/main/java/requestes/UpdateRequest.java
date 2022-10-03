@@ -2,7 +2,6 @@ package requestes;
 
 import abstractions.creator.Creator;
 import exceptions.ArgumentTypeException;
-import abstractions.requests.CreationCommandRequest;
 import model.Organization;
 
 public class UpdateRequest extends CreationCommandRequest<Organization> {

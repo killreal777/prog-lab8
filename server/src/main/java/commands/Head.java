@@ -11,8 +11,10 @@ public class Head extends ServerCommand {
 
     @Override
     public void execute() {
-        dao.getCollection().stream().findFirst().map(Organization::toString).ifPresent(this::writeResult);
-        if (result.equals(""))
-            result = "Коллекция пуста";
+        dao.getCollection().stream().findFirst().ifPresent(result::setJavaObject);
+        if (result.getJavaObject() == null)
+            result.setBadResult("Коллекция пуста");
+        else
+            result.setGoodResult(result.getJavaObject().toString());
     }
 }

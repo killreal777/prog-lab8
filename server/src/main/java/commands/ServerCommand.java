@@ -2,6 +2,7 @@ package commands;
 
 import abstractions.command.Command;
 import data.dao.Dao;
+import response.Result;
 
 public abstract class ServerCommand extends Command {
     protected Dao dao;
@@ -18,4 +19,10 @@ public abstract class ServerCommand extends Command {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
+    protected void setResult(Result result) {
+        this.result = result;
+    }
+
+
 }

@@ -1,7 +1,6 @@
 package requestes;
 
 import abstractions.creator.Creator;
-import abstractions.requests.CreationCommandRequest;
 import model.Organization;
 
 public class AddRequest extends CreationCommandRequest<Organization> {

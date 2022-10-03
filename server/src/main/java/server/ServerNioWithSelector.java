@@ -1,7 +1,6 @@
 package server;
 
 import exceptions.ConnectionException;
-import exceptions.ServerException;
 import io.Format;
 import io.TextFormatter;
 
@@ -14,6 +13,7 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.rmi.ServerException;
 import java.util.Iterator;
 import java.util.Set;
 

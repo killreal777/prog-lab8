@@ -10,6 +10,6 @@ public class Info extends ServerCommand {
 
     @Override
     public void execute() {
-        writeResult(String.format("Количество элементов: %d", dao.getCollection().size()));
+        result.setGoodResult(String.format("Количество элементов: %d", dao.getCollection().size()));
     }
 }

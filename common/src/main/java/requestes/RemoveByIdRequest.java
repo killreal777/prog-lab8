@@ -1,6 +1,5 @@
 package requestes;
 
-import abstractions.requests.ArguedCommandRequest;
 import exceptions.ArgumentTypeException;
 
 public class RemoveByIdRequest extends ArguedCommandRequest<Integer> {

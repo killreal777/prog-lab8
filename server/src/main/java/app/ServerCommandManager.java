@@ -37,7 +37,6 @@ public class ServerCommandManager extends PrototypesManager<ServerCommand> {
         addPrototype("clear", new Clear(dao));
         addPrototype("show", new Show(dao));
         addPrototype("head", new Head(dao));
-        addPrototype("print_ascending", new PrintAscending(dao));
         addPrototype("info", new Info(dao));
     }
 }
